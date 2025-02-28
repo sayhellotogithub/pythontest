@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>FlashTestMain</title>
+    </head>
+    <body>
+        <h1>book shop</h1>
+        <h2>new books  this month</h2>
+        <p>Nothing</p>
+
+        {% for book in books %}
+            <p>title:{{book.title}}</p>
+            <p>price:{{book.price}}$</p>
+            <p>arrival date:{{book.arrival_day}}</p>
+        {% endfor %}
+       
+    </body>
+</html>
