@@ -1,6 +1,8 @@
 from flaskpj import app
 from flask import render_template
+from flask import url_for
 from markupsafe import escape
+
 
 @app.route('/')
 def index():
@@ -27,3 +29,9 @@ def show_post(post_id):
 def show_subpath(subpath):
     return f'Subpath{escape(subpath)}'
 
+
+
+with app.test_request_context():
+    print(url_for('index'))
+    # print(url_for('login'))
+    print(url_for('escape_handler',name='John Doe'))
