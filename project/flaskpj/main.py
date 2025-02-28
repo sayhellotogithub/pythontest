@@ -2,6 +2,8 @@ from flaskpj import app
 from flask import render_template
 from flask import url_for
 from markupsafe import escape
+from flask import request
+import flaskpj.util.login_util as login_util
 
 
 @app.route('/')
@@ -28,6 +30,20 @@ def show_post(post_id):
 @app.route('/path/<path:subpath>')
 def show_subpath(subpath):
     return f'Subpath{escape(subpath)}'
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+    error=None
+    if request.method == 'POST':
+        if login_util.valid_login(request.form['username'],
+                       request.form['password']):
+            return login_util.log_user_in(request.form['username'])
+        else:
+            error = 'Invalid username/password'
+
+    else:
+        return render_template('login.html')
+
 
 
 
