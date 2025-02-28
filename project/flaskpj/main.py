@@ -1,5 +1,6 @@
 from flaskpj import app
 from flask import render_template
+from markupsafe import escape
 
 @app.route('/')
 def index():
@@ -13,3 +14,16 @@ def index():
         'arrival_day':'2030-08-12'
     }]
     return render_template('index.html',books=books)
+
+@app.route("/escape_handler/<name>")
+def escape_handler(name):
+    return render_template('escape_handler.html',backvalue=f"handle data,{escape(name)}")
+
+@app.route("/post/<int:post_id>")
+def show_post(post_id):
+    return f'Post{post_id}'
+
+@app.route('/path/<path:subpath>')
+def show_subpath(subpath):
+    return f'Subpath{escape(subpath)}'
+
